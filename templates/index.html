@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="bg-white shadow sm:rounded-lg mb-8">
+    <div class="px-4 py-5 sm:p-6">
+        <h2 class="text-lg font-medium leading-6 text-gray-900 mb-4">Sign the Guestbook</h2>
+        <form action="/sign" method="post" class="space-y-4">
+            <div>
+                <label for="message" class="block text-sm font-medium text-gray-700">
+                    Your Message
+                </label>
+                <div class="mt-1">
+                    <textarea
+                        id="message"
+                        name="message"
+                        rows="4"
+                        class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md p-2 border"
+                        placeholder="Write your message here..."
+                        required
+                    ></textarea>
+                </div>
+            </div>
+            <div>
+                <button type="submit" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    Sign Guestbook
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="bg-white shadow sm:rounded-lg">
+    <div class="px-4 py-5 sm:p-6">
+        <h2 class="text-lg font-medium leading-6 text-gray-900 mb-4">Recent Messages</h2>
+        
+        {% if messages %}
+            <div class="space-y-4">
+                {% for message in messages %}
+                    <div class="message-container bg-gray-50 p-4 rounded-lg border border-gray-200">
+                        <div class="text-sm text-gray-900">{{ message.message }}</div>
+                        <div class="mt-2 text-xs text-gray-500">
+                            Posted on {{ message.timestamp }}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="text-center py-8">
+                <p class="text-gray-500 text-sm">No messages yet. Be the first to sign the guestbook!</p>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
